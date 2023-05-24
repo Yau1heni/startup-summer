@@ -1,0 +1,17 @@
+.tabLabel[data-active] {
+    color: blue;
+}
+
+.tabLabel {
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 1px;
+}
+
+.tabs {
+    color: #232134;
+    padding: 10px 30px;
+}

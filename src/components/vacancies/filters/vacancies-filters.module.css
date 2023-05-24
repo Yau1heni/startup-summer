@@ -1,0 +1,39 @@
+.container {
+    width: 315px;
+    height: 360px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.titleContainer {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 32px;
+}
+
+.titleText {
+    margin: 0;
+    font-family: 'Inter', serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+    color: #232134;
+}
+
+.resetContainer {
+    display: flex;
+    align-items: center;
+}
+
+.resetText {
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    color: #ACADB9;
+}
+
+.salaryContainer {
+    padding: 20px 0;
+}

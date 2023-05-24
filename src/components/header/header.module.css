@@ -1,0 +1,25 @@
+.headerContainer {
+    display: flex;
+    max-width: 1116px;
+    margin: 0 auto 40px;
+    align-items: center;
+}
+
+.titleContainer {
+    display: flex;
+    gap: 12px;
+    margin: 24px 0;
+}
+
+.title {
+    margin: 0;
+    font-family: 'Poppins', serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+}
+
+.tabsContainer {
+    margin-left: 250px
+}
