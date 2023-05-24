@@ -20,7 +20,7 @@ export const useAccessToken = () => {
     if (token.length === 0) {
       authService.login(payloadMock).then((res) => setToken(res.access_token))
     }
-  }, [])
+  }, [token, setToken])
 
   return [token, setToken]
 }

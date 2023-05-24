@@ -6,7 +6,7 @@ interface State {
   setAccessToken: (accessToken: string) => void
 }
 
-export const useAuthStore = create<State>(
+export const useAuthStore = create<State, [['zustand/persist', State]]>(
   persist(
     (set) => ({
       accessToken: '',
