@@ -13,7 +13,7 @@ export const useFavorites = (vacancy: VacancyType): ReturnType => {
     if (favorites?.findIndex((el) => el.id === vacancy.id) !== -1) {
       setIsFavorites(true)
     }
-  }, [favorites])
+  }, [favorites, vacancy.id])
 
   const controlFavoritesHandler = (id: number) => {
     if (isFavorites) {
