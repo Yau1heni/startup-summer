@@ -4,13 +4,13 @@ import { Button, NumberInput, SelectItem } from '@mantine/core'
 import { useQuery } from 'react-query'
 import { cataloguesService } from '@/services/catalogues-service'
 import { noRefetch } from '@/utils/no-refetch'
-import { Params, useFilterParamsStore } from '@/store/useFilterParamsStore'
+import { initialState, Params, useFilterParamsStore } from '@/store/useFilterParamsStore'
 import { FC } from 'react'
 import close from 'public/close.svg'
 import Image from 'next/image'
 
-export const VacanciesFilters: FC<PropsType> = ({ setApplyFilter }) => {
-  const { params, setCatalogues, setPaymentTo, setPaymentFrom } = useFilterParamsStore()
+export const VacanciesFilters: FC<PropsType> = ({ params, setApplyFilter }) => {
+  const { setCatalogues, setPaymentTo, setPaymentFrom, clearState } = useFilterParamsStore()
 
   const { isLoading, data } = useQuery({
     queryKey: 'getCatalogues',
@@ -27,6 +27,11 @@ export const VacanciesFilters: FC<PropsType> = ({ setApplyFilter }) => {
     setApplyFilter(params)
   }
 
+  const handleClickResetFilter = () => {
+    clearState()
+    setApplyFilter(initialState)
+  }
+
   const catalogues = data?.map((el) => ({
     value: el.key,
     label: el.title,
@@ -36,7 +41,7 @@ export const VacanciesFilters: FC<PropsType> = ({ setApplyFilter }) => {
     <div className={styles.container}>
       <div className={styles.titleContainer}>
         <div className={styles.titleText}>Фильтры</div>
-        <div className={styles.resetContainer}>
+        <div onClick={handleClickResetFilter} className={styles.resetContainer}>
           <div className={styles.resetText}>сбросить все</div>
           <Image src={close} alt={'close'} />
         </div>
@@ -71,5 +76,6 @@ export const VacanciesFilters: FC<PropsType> = ({ setApplyFilter }) => {
 }
 
 type PropsType = {
+  params: Params
   setApplyFilter: (applyFilter: Params) => void
 }

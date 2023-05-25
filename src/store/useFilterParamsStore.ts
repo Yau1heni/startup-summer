@@ -20,6 +20,7 @@ interface ParamsState {
   setPaymentFrom: (paymentFrom: number | '') => void
   setPaymentTo: (paymentTo: number | '') => void
   setNoAgreement: (noAgreement: number) => void
+  clearState: () => void
 }
 
 export const initialState: Params = {
