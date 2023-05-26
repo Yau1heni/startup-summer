@@ -5,7 +5,7 @@ import styles from './empty-state.module.css'
 export const EmptyState = () => {
   return (
     <div className={styles.container}>
-      <Image src={emptyStateImage} alt={'empty state'} />
+      <Image src={emptyStateImage} alt={'empty state'} priority />
       <div className={styles.text}>Упс, здесь еще ничего нет!</div>
     </div>
   )

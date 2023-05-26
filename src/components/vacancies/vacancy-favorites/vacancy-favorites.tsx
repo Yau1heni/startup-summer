@@ -4,15 +4,26 @@ import { VacancyType } from '@/services/vacancies-service'
 import styles from './vacancy-favorites.module.css'
 import { useRouter } from 'next/router'
 import { RouteNames } from '@/consts/routes'
+import { useEffect, useState } from 'react'
 
 export const VacancyFavorites = () => {
   const [value] = useLocalStorage<VacancyType[]>({
     key: 'favorites',
   })
 
+  const [isLoading, setIsLoading] = useState(true)
+
   const { push } = useRouter()
 
-  if (value?.length === 0) {
+  useEffect(() => {
+    setIsLoading(false)
+  }, [value])
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
+  if (!value || value?.length === 0) {
     push(RouteNames.EMPTY_STATE)
   }
 
