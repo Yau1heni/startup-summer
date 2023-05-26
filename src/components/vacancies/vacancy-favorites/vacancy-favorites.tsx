@@ -5,6 +5,7 @@ import styles from './vacancy-favorites.module.css'
 import { useRouter } from 'next/router'
 import { RouteNames } from '@/consts/routes'
 import { useEffect, useState } from 'react'
+import { Loader } from '@mantine/core'
 
 export const VacancyFavorites = () => {
   const [value] = useLocalStorage<VacancyType[]>({
@@ -20,7 +21,7 @@ export const VacancyFavorites = () => {
   }, [value])
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loader />
   }
 
   if (!value || value?.length === 0) {

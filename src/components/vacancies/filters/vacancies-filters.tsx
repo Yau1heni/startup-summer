@@ -1,6 +1,6 @@
 import { Dropdown } from '@/components/ui/dropdown/dropdown'
 import styles from './vacancies-filters.module.css'
-import { Button, NumberInput, SelectItem } from '@mantine/core'
+import { Button, Loader, NumberInput, SelectItem } from '@mantine/core'
 import { useQuery } from 'react-query'
 import { cataloguesService } from '@/services/catalogues-service'
 import { noRefetch } from '@/utils/no-refetch'
@@ -20,7 +20,7 @@ export const VacanciesFilters: FC<PropsType> = ({ params, setApplyFilter }) => {
   })
 
   if (isLoading) {
-    return <span>Loading...</span>
+    return <Loader />
   }
 
   const handleClickFilter = () => {

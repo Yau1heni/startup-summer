@@ -7,7 +7,7 @@ import { SearchInput } from '@/components/vacancies/search-input/search-input'
 import { noRefetch } from '@/utils/no-refetch'
 import { Params, useFilterParamsStore } from '@/store/useFilterParamsStore'
 import { useState } from 'react'
-import { Pagination } from '@mantine/core'
+import { Loader, Pagination } from '@mantine/core'
 import { useRouter } from 'next/router'
 import { RouteNames } from '@/consts/routes'
 
@@ -42,7 +42,7 @@ export const Vacancies = () => {
   })
 
   if (isLoading) {
-    return <span>Loading...</span>
+    return <Loader />
   }
 
   if (data?.length === 0) {
