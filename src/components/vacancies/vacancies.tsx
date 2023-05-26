@@ -5,15 +5,30 @@ import { VacancyCard } from '@/components/vacancies/vacancy/vacancy-card/vacancy
 import styles from './vacancies.module.css'
 import { SearchInput } from '@/components/vacancies/search-input/search-input'
 import { noRefetch } from '@/utils/no-refetch'
-import { initialState, useFilterParamsStore } from '@/store/useFilterParamsStore'
+import { Params, useFilterParamsStore } from '@/store/useFilterParamsStore'
 import { useState } from 'react'
+import { Pagination } from '@mantine/core'
+
+const initialStateFilter: Params = {
+  page: 0,
+  count: 4,
+  catalogues: '',
+  keyword: '',
+  payment_to: '',
+  payment_from: '',
+  no_agreement: 1,
+  published: 1,
+}
 
 export const Vacancies = () => {
-  const [applyFilter, setApplyFilter] = useState(initialState)
+  const [applyFilter, setApplyFilter] = useState(initialStateFilter)
 
   const inputValue = useFilterParamsStore((state) => state.params.keyword)
   const setInputValue = useFilterParamsStore((state) => state.setKeyword)
   const params = useFilterParamsStore((state) => state.params)
+  const page = useFilterParamsStore((state) => state.params.page)
+  const setPage = useFilterParamsStore((state) => state.setPage)
+  const totalPages = 125
 
   const { isLoading, data } = useQuery({
     queryKey: ['getVacancies', applyFilter],
@@ -24,6 +39,10 @@ export const Vacancies = () => {
 
   if (isLoading) {
     return <span>Loading...</span>
+  }
+
+  const onClickPaginationHandler = () => {
+    setApplyFilter(params)
   }
 
   const vacanciesList = data?.map((vacancy) => (
@@ -41,6 +60,12 @@ export const Vacancies = () => {
           onChange={setInputValue}
         />
         {vacanciesList}
+        <Pagination
+          total={totalPages}
+          value={page}
+          onClick={onClickPaginationHandler}
+          onChange={setPage}
+        />
       </div>
     </div>
   )
