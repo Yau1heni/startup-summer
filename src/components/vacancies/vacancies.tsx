@@ -8,6 +8,8 @@ import { noRefetch } from '@/utils/no-refetch'
 import { Params, useFilterParamsStore } from '@/store/useFilterParamsStore'
 import { useState } from 'react'
 import { Pagination } from '@mantine/core'
+import { useRouter } from 'next/router'
+import { RouteNames } from '@/consts/routes'
 
 const initialStateFilter: Params = {
   page: 0,
@@ -30,6 +32,8 @@ export const Vacancies = () => {
   const setPage = useFilterParamsStore((state) => state.setPage)
   const totalPages = 125
 
+  const { push } = useRouter()
+
   const { isLoading, data } = useQuery({
     queryKey: ['getVacancies', applyFilter],
     queryFn: () => vacanciesService.getVacancies(applyFilter),
@@ -41,6 +45,9 @@ export const Vacancies = () => {
     return <span>Loading...</span>
   }
 
+  if (data?.length === 0) {
+    push(RouteNames.EMPTY_STATE)
+  }
   const onClickPaginationHandler = () => {
     setApplyFilter(params)
   }

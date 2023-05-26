@@ -1,0 +1,13 @@
+.container {
+    margin: 0 auto;
+    width: 327px;
+}
+
+.text {
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    color: #343A40;
+}
