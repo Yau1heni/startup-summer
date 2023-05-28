@@ -32,5 +32,9 @@ export const VacancyFavorites = () => {
     <VacancyCard key={`ls${favorites.id}`} vacancy={favorites} />
   ))
 
-  return <div className={styles.container}>{favoritesList}</div>
+  return (
+    <div className={styles.container}>
+      <div className={styles.favoritesList}>{favoritesList}</div>
+    </div>
+  )
 }

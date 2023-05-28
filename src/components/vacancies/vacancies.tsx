@@ -58,6 +58,7 @@ export const Vacancies = () => {
 
   return (
     <div className={styles.container}>
+      {/*{!isMobile && <VacanciesFilters setApplyFilter={setApplyFilter} params={params} />}*/}
       <VacanciesFilters setApplyFilter={setApplyFilter} params={params} />
       <div className={styles.vacanciesContainer}>
         <SearchInput

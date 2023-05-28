@@ -8,9 +8,12 @@ import { initialState, Params, useFilterParamsStore } from '@/store/useFilterPar
 import { FC } from 'react'
 import close from 'public/close.svg'
 import Image from 'next/image'
+import { useBurgerStore } from '@/store/useBurgerStore'
 
 export const VacanciesFilters: FC<PropsType> = ({ params, setApplyFilter }) => {
   const { setCatalogues, setPaymentTo, setPaymentFrom, clearState } = useFilterParamsStore()
+
+  const opened = useBurgerStore((state) => state.opened)
 
   const { isLoading, data } = useQuery({
     queryKey: 'getCatalogues',
@@ -38,40 +41,44 @@ export const VacanciesFilters: FC<PropsType> = ({ params, setApplyFilter }) => {
   })) as SelectItem[]
 
   return (
-    <div className={styles.container}>
-      <div className={styles.titleContainer}>
-        <div className={styles.titleText}>Фильтры</div>
-        <div onClick={handleClickResetFilter} className={styles.resetContainer}>
-          <div className={styles.resetText}>сбросить все</div>
-          <Image src={close} alt={'close'} />
+    <>
+      {opened && (
+        <div className={styles.container}>
+          <div className={styles.titleContainer}>
+            <div className={styles.titleText}>Фильтры</div>
+            <div onClick={handleClickResetFilter} className={styles.resetContainer}>
+              <div className={styles.resetText}>сбросить все</div>
+              <Image src={close} alt={'close'} />
+            </div>
+          </div>
+          <Dropdown
+            label={'Отрасль'}
+            placeholder={'выберите отрасль'}
+            catalogues={catalogues}
+            value={params.catalogues}
+            setValue={setCatalogues}
+          />
+          <div className={styles.salaryContainer}>
+            <NumberInput
+              data-elem="salary-from-input"
+              label={'Оклад'}
+              placeholder={'от'}
+              value={params.payment_from}
+              onChange={setPaymentFrom}
+            />
+            <NumberInput
+              data-elem="salary-to-input"
+              placeholder={'до'}
+              value={params.payment_to}
+              onChange={setPaymentTo}
+            />
+          </div>
+          <Button fullWidth data-elem="search-button" size={'md'} onClick={handleClickFilter}>
+            Применить
+          </Button>
         </div>
-      </div>
-      <Dropdown
-        label={'Отрасль'}
-        placeholder={'выберите отрасль'}
-        catalogues={catalogues}
-        value={params.catalogues}
-        setValue={setCatalogues}
-      />
-      <div className={styles.salaryContainer}>
-        <NumberInput
-          data-elem="salary-from-input"
-          label={'Оклад'}
-          placeholder={'от'}
-          value={params.payment_from}
-          onChange={setPaymentFrom}
-        />
-        <NumberInput
-          data-elem="salary-to-input"
-          placeholder={'до'}
-          value={params.payment_to}
-          onChange={setPaymentTo}
-        />
-      </div>
-      <Button fullWidth data-elem="search-button" size={'md'} onClick={handleClickFilter}>
-        Применить
-      </Button>
-    </div>
+      )}
+    </>
   )
 }
 

@@ -11,6 +11,10 @@
     margin: 24px 0;
 }
 
+.burger {
+    margin-left: auto;
+}
+
 .title {
     margin: 0;
     font-family: 'Poppins', serif;
@@ -22,4 +26,14 @@
 
 .tabsContainer {
     margin-left: 250px
+}
+
+@media (max-width: 768px) {
+    .headerContainer {
+        margin: 0;
+    }
+
+    .tabsContainer {
+        margin: 0 auto;
+    }
 }

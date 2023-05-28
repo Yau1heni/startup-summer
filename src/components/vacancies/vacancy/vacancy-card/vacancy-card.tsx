@@ -6,9 +6,11 @@ import Link from 'next/link'
 import { Text } from '@mantine/core'
 import { FavoriteIcon } from '@/components/vacancies/vacancy/favorite-icon/favorite-icon'
 import { useFavorites } from '@/hooks/useFavorites'
+import { useMediaQuery } from '@mantine/hooks'
 
 export const VacancyCard: FC<PropsType> = ({ vacancy }) => {
   const [isFavorites, controlFavoritesHandler] = useFavorites(vacancy)
+  const matches = useMediaQuery('(max-width: 768px)')
 
   const onclickHandler = () => {
     controlFavoritesHandler(vacancy.id)
@@ -16,9 +18,9 @@ export const VacancyCard: FC<PropsType> = ({ vacancy }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.contentContainer}>
-        <Link href={`/vacancies/${vacancy.id}`}>
-          <Text color={colorsTheme.colors.blue[5]} size={'lg'} weight={'600'}>
+      <div>
+        <Link href={`/vacancies/${vacancy.id}`} style={{ textDecoration: 'none' }}>
+          <Text color={colorsTheme.colors.blue[5]} size={matches ? 'md' : 'lg'} weight={'600'}>
             {vacancy.profession}
           </Text>
         </Link>
@@ -30,11 +32,13 @@ export const VacancyCard: FC<PropsType> = ({ vacancy }) => {
         <div> {vacancy.type_of_work.title}</div>
         <div> {vacancy.town.title}</div>
       </div>
-      <FavoriteIcon
-        data-elem={`vacancy-${vacancy.id}-shortlist-button`}
-        onClick={onclickHandler}
-        isFavorites={isFavorites}
-      />
+      <div className={styles.favoriteIcon}>
+        <FavoriteIcon
+          data-elem={`vacancy-${vacancy.id}-shortlist-button`}
+          onClick={onclickHandler}
+          isFavorites={isFavorites}
+        />
+      </div>
     </div>
   )
 }
